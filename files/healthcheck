@@ -1,0 +1,15 @@
+#!/bin/bash 
+
+
+SIP=$(/usr/sbin/asterisk -rx "sip show peers" |awk '{print $1 $2 $3}')
+
+
+if [ "$SIP" = "Nosuchcommand" ];then
+        exit 1
+fi
+
+
+
+
+#Si todo va bien 
+exit 0 

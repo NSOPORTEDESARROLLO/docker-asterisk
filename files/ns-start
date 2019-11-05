@@ -4,27 +4,12 @@
 #Funciones:
 function enable_g729(){
 
-    files=$(ls -1 /g729 | wc -l)
-    filename=$(ls /g729)
-    if [ "$files" = "1" ];then
-        cp -rf /g729/$filename /usr/lib/asterisk/modules/codec_g729.so
-    else 
-
-        echo "Es imposible activar el codec g729, revise que solo exista un archivo con la libreria"
-        exit 1
+    if [ -f /g729/codec_g729.so ];then
+        if [ ! -f /opt/asterisk/lib/asterisk/modules/codec_g729.so ];then
+            cp -rf /g729/codec_g729.so /opt/asterisk/lib/asterisk/modules/
+            chmod +x /opt/asterisk/lib/asterisk/modules/codec_g729.so
+        fi
     fi
-
-
-}
-
-
-
-function check_nspbx(){
-
-
-    echo "NSPBX"
-
-
 
 }
 
@@ -51,17 +36,14 @@ function check_default(){
 }
 
 #Activar g729 si se necesita
-if [ "$G729" = "YES" ];then
+G729=(ls -A /g729)
+if [ "$G729" != "" ];then
     enable_g729
-fi
+fi  
 
 
 #Verificar si existen los archivos por defecto 
-if [ "$MODE" = "NSPBX" ];then
-    check_nspbx
-else
-    check_default
-fi
+check_default
 
 
 

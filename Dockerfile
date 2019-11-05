@@ -135,12 +135,14 @@ RUN         for cmd in $(ls /opt/asterisk/sbin);do ln -s /opt/asterisk/sbin/$cmd
 
 #Inicio del contenedor y salud
 COPY        files/ns-start /usr/bin/
+COPY        files/healthcheck /usr/bin/
 
 
-RUN         chmod +x /usr/bin/ns-start
+RUN         chmod +x /usr/bin/ns-start; \
+            chmod +x /usr/bin/healthcheck
 
 
-
+HEALTHCHECK --interval=120s --timeout=30s --start-period=240s CMD /usr/bin/healthcheck
 ENTRYPOINT  [ "/usr/bin/ns-start" ]
 
 
