@@ -95,7 +95,8 @@ RUN		    apt-get update; apt-get -y upgrade; \
             libwrap0 libx11-6 libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 \
             libxdmcp6 libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 netbase openssl \
             perl perl-modules pinentry-gtk2 rename sgml-base shared-mime-info sox tcpd ucf xdg-user-dirs \
-            xml-core mysql-client libneon27 libbluetooth3 php5-cli
+            xml-core mysql-client libneon27 libbluetooth3 php5-cli libdbd-mysql-perl libdatetime-perl libdatetime-format-strptime-perl \
+	    python3 python3-mysql.connector python3-pip
 
 
 
