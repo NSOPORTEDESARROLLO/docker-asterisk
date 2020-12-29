@@ -14,17 +14,17 @@ RUN         apt-get -y install wget build-essential  git-core subversion \
             libpq-dev libsnmp-dev libspandsp-dev libspeex-dev libspeexdsp-dev \
             libsqlite0-dev libsqlite3-dev libssl-dev libusb-dev libvorbis-dev \
             libvpb-dev lua5.1 portaudio19-dev unixodbc-dev uuid \
-            uuid-dev unzip default-libmysqlclient-dev
+            uuid-dev unzip default-libmysqlclient-dev  xmlstarlet
 
 
 
 #Descargar el fuente de asterisk 
-RUN         wget -P /usr/src "http://downloads.asterisk.org/pub/telephony/certified-asterisk/releases/asterisk-certified-13.21-cert6.tar.gz"; \
-            tar -xzvf /usr/src/asterisk-certified-13.21-cert6.tar.gz -C /usr/src/
+RUN         wget -P /usr/src "http://downloads.asterisk.org/pub/telephony/certified-asterisk/asterisk-certified-16.8-cert5.tar.gz"; \
+            tar -xzvf /usr/src/asterisk-certified-16.8-cert5.tar.gz -C /usr/src/
             
 
 
-WORKDIR     /usr/src/asterisk-certified-13.21-cert6
+WORKDIR     /usr/src/asterisk-certified-16.8-cert5
 
 
 
@@ -37,13 +37,17 @@ RUN         ./configure --prefix=/opt/asterisk; \
             menuselect/menuselect --enable format_mp3 menuselect.makeopts; \
             menuselect/menuselect --enable res_config_mysql menuselect.makeopts; \
             menuselect/menuselect --enable app_mysql menuselect.makeopts; \
-            menuselect/menuselect --enable app_saycountpl menuselect.makeopts; \
+            menuselect/menuselect --enable codec_opus menuselect.makeopts; \
+            menuselect/menuselect --enable codec_silk menuselect.makeopts; \
+            menuselect/menuselect --enable codec_siren7 menuselect.makeopts; \
+            menuselect/menuselect --enable codec_siren14 menuselect.makeopts; \
+            menuselect/menuselect --enable codec_g729a menuselect.makeopts; \
             menuselect/menuselect --enable cdr_mysql menuselect.makeopts; \
             menuselect/menuselect --enable app_skel menuselect.makeopts; \
             menuselect/menuselect --enable chan_sip menuselect.makeopts; \
             menuselect/menuselect --enable cdr_csv menuselect.makeopts; \
             menuselect/menuselect --enable app_festival menuselect.makeopts; \
-            /usr/src/asterisk-certified-13.21-cert6/contrib/scripts/get_mp3_source.sh; \
+            /usr/src/asterisk-certified-16.8-cert5/contrib/scripts/get_mp3_source.sh; \
             #echo -e "yes" | /usr/src/asterisk-certified-13.21-cert6/contrib/scripts/get_ilbc_source.sh
 
             
@@ -96,7 +100,7 @@ RUN		    apt-get update; apt-get -y upgrade; \
             libwrap0 libx11-6 libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 \
             libxdmcp6 libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 netbase openssl \
             perl perl-modules pinentry-gtk2 rename sgml-base shared-mime-info sox tcpd ucf xdg-user-dirs \
-            xml-core default-mysql-client libneon27 libbluetooth3 php7.3-cli libjansson4
+            xml-core default-mysql-client libneon27 libbluetooth3 xmlstarlet libjansson4
 
 
 

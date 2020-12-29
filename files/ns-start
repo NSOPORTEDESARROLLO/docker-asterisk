@@ -2,18 +2,6 @@
 
 
 #Funciones:
-function enable_g729(){
-
-    if [ -f /g729/codec_g729.so ];then
-        if [ ! -f /opt/asterisk/lib/asterisk/modules/codec_g729.so ];then
-            cp -rf /g729/codec_g729.so /opt/asterisk/lib/asterisk/modules/
-            chmod +x /opt/asterisk/lib/asterisk/modules/codec_g729.so
-        fi
-    fi
-
-}
-
-
 function check_default(){
 
     astvar=$(ls -A  /var/lib/asterisk )
@@ -35,16 +23,9 @@ function check_default(){
 
 }
 
-#Activar g729 si se necesita
-G729=(ls -A /g729)
-if [ "$G729" != "" ];then
-    enable_g729
-fi  
-
 
 #Verificar si existen los archivos por defecto 
 check_default
-
 
 
 #Inicio reparando permisos de archivos
