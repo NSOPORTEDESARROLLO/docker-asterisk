@@ -19,7 +19,7 @@ RUN         apt-get -y install wget build-essential  git-core subversion \
 
 
 #Descargar el fuente de asterisk 
-RUN         wget -P /usr/src "http://downloads.asterisk.org/pub/telephony/certified-asterisk/asterisk-certified-13.21-current.tar.gz"; \
+RUN         wget -P /usr/src "http://downloads.asterisk.org/pub/telephony/certified-asterisk/releases/asterisk-certified-13.21-cert6.tar.gz"; \
             tar -xzvf /usr/src/asterisk-certified-13.21-current.tar.gz -C /usr/src/
             
 
