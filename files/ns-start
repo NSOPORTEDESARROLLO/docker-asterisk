@@ -9,15 +9,15 @@ function check_default(){
     astspool=$(ls -A /var/spool/asterisk )
 
     if [ "$astvar" = "" ];then
-        cp -rf /opt/asterisk/samples/asterisk-lib/* /var/lib/asterisk/
+        cp -rf /opt/asterisk-var/* /var/lib/asterisk/
     fi
 
     if [ "$astetc" = "" ];then
-        cp -rf /opt/asterisk/samples/asterisk-etc/* /etc/asterisk/
+        cp -rf /opt/asterisk-etc/* /etc/asterisk/
     fi
 
     if [ "$astspool" = "" ];then
-        cp -rf /opt/asterisk/samples/asterisk-spool/* /var/spool/asterisk/
+        cp -rf /opt/asterisk-spool/* /var/spool/asterisk/
         chown -R asterisk.asterisk /var/spool/asterisk
     fi
 
@@ -27,6 +27,12 @@ function check_default(){
 #Verificar si existen los archivos por defecto 
 check_default
 
+#revisar si existe el codec g729
+if [ -f "/custom/codec_g729.so" ];then 
+
+    cp /custom/codec_g729.so /usr/lib/asterisk/modules/
+
+fi
 
 #Inicio reparando permisos de archivos
 chown -R asterisk.asterisk /etc/asterisk 
@@ -34,7 +40,14 @@ chown -R asterisk.asterisk /var/log/asterisk
 chown -R asterisk.asterisk /var/lib/asterisk
 chmod +x /usr/lib/asterisk/modules/*
 
+#Ejecuto ordenes predeterminadas para archivos modificados
+if [ -f "/custom/ns-start" ];then
 
+    chmod +x /custom/ns-start
+    exec /custom/ns-start
 
-#Proceso principal
-exec /usr/sbin/asterisk -f -U asterisk -G asterisk
+else 
+
+    exec /usr/sbin/asterisk -f -U asterisk -G asterisk
+
+fi

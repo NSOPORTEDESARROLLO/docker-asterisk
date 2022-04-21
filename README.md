@@ -4,4 +4,10 @@ Contenedor con asterisk instalado, tiene todo lo necesario para correr en la nub
 
 
 ## Volumenes:
-* /g729: Montar este volumen para que el contenedor habilite el codec g729, se debde descargar el codec de la siguiente URL: http://asterisk.hosting.lv/
+* /custom: Dentro de este directorio se deben poner los siguientes archivos:
+- codec_g729.so: Copia y habilita el codec g729 URL: http://asterisk.hosting.lv/
+- ns-start: Reescribe el script de inicio en caso de costumizarlo 
+
+* /etc/asterisk: Archivos de configuracion 
+* /var/lib/asterisk: Librerias, sonidos y agis 
+* /var/lib/spool: Grabaciones y correos de voz
